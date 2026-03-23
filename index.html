@@ -67,3 +67,42 @@
     </div>
 </body>
 </html>
+<!-- CARRITO -->
+  <div id="carrito"> 
+  <p>  <h2>🛒 Agregar al Carrito </h2> <p>  
+  <div id="lista-carrito"></div>
+  <div class="total">Total: CRC <span id="total">0.00</span></div>
+</div>
+      
+ <!-- Métodos de pago -->
+    <div class="metodos">
+      <h3>Selecciona método de pago:</h3>
+      <label><input type="radio" name="pago" value="Efectivo"> Efectivo</label><br>
+      <label><input type="radio" name="pago" value="Sinpe Móvil"> Sinpe Móvil |  Numero seria 83310615</label>
+       <p>Para Más informacion con el pago se puede comunicar a este numero <a href="https://wa.me/50683310615" target="_blank">Enviar mensaje por WhatsApp</a>
+    </div>
+  <button class="boton" onclick="confirmarCompra()">Confirmar compra</button>
+</div>
+<script>
+  const botones = document.querySelectorAll('.boton');
+  const listaCarrito = document.getElementById('lista-carrito');
+  const totalSpan = document.getElementById('total');
+  let total = 0;
+
+  botones.forEach(boton => {
+    boton.addEventListener('click', () => {
+      const producto = boton.parentElement;
+      const nombre = producto.querySelector('.nombre').textContent;
+      const precio = parseFloat(producto.querySelector('.precio').getAttribute('data-precio')) || 0;
+
+      const item = document.createElement('div');
+      item.textContent = `${nombre} - CRC ${precio.toLocaleString('es-CR')}`;
+      listaCarrito.appendChild(item);
+
+      total += precio;
+      totalSpan.textContent = total.toLocaleString('es-CR', { minimumFractionDigits: 2 });
+    });
+  });
+</script>
+
+
